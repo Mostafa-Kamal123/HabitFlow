@@ -18,7 +18,7 @@ class HabitFlow extends StatelessWidget {
         return AppBackground(child: child!);
       },
       debugShowCheckedModeBanner: false,
-      theme: HabitFlowTheme.lightTheme,
+      theme: HabitFlowTheme.lightTheme.copyWith(scaffoldBackgroundColor: Colors.transparent),
       darkTheme: HabitFlowTheme.darkTheme,
       home: SplashScreen(),
     );
