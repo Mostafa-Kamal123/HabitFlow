@@ -25,12 +25,12 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
 
   void navigateToHome() {
     Future.delayed(const Duration(seconds: 2),(){
-      Get.to(()=>Homepage(),transition: Transition.fade,duration: Duration(milliseconds: 250));
+      Get.to(()=>Homepage(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
     });
   }
 
   void initSlidingAnimation() {
-    animationController=AnimationController(vsync: this,duration: Duration(seconds: 1));
+    animationController=AnimationController(vsync: this,duration:const Duration(seconds: 1));
     slidinganimation=Tween<Offset>(begin: Offset(0, 2),end: Offset.zero).animate(animationController);
     animationController.forward();
   }
