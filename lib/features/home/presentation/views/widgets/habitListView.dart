@@ -10,31 +10,31 @@ class HabitListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: [
-          Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-        const Text("Today's Habits",style: TextStyle(color: Colors.grey),),
-        TextButton(onPressed: (){}, child: const Row(
-          
-          children: [
-            Text("See All",style: TextStyle(color: Colors.grey),),
-            SizedBox(width: 5,),
-            FaIcon(FontAwesomeIcons.arrowRight,color: Colors.grey,)
-        ],))
-      ],),
-    ),
-          habitCard(),
-          habitCard(),
-          habitCard(),
-          habitCard(),
-        ],
+    return ListView(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      children: [
+        Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+      const Text("Today's Habits",style: TextStyle(color: Colors.black),),
+      TextButton(onPressed: (){}, child: const Row(
         
-      ),
+        children: [
+          Text("See All",style: TextStyle(color: Colors.grey),),
+          SizedBox(width: 5,),
+          FaIcon(FontAwesomeIcons.arrowRight,color: Colors.grey,)
+      ],))
+    ],),
+        ),
+        habitCard(),
+        habitCard(),
+        habitCard(),
+        habitCard(),
+      ],
+      
     );
   }
 }

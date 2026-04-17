@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:habit_flow/core/utils/assets.dart';
 import 'package:habit_flow/features/home/presentation/views/homePage.dart';
+import 'package:habit_flow/features/onboard/presentation/views/onboardScreens.dart';
 import 'package:habit_flow/features/splash/presentation/views/widgets/slidingText.dart';
 
 class SplashBody extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
 
   void navigateToHome() {
     Future.delayed(const Duration(seconds: 2),(){
-      Get.to(()=>Homepage(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
+      Get.to(()=>onBardScreens(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
     });
   }
 

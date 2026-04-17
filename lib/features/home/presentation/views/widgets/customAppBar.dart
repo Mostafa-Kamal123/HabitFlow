@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Good Morning ,Mostafa",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black),),
+                Text("Good Morning ,Mostafa",style: TextStyle(fontSize: 20,color: Colors.black),),
                 SizedBox(height: 5,),
                 Text(today)
               ],

@@ -1,0 +1,20 @@
+{
+  "background_light_start": "#BBE5FC",
+  "background_light_end": "#EFCFF5",
+  "surface": "#F5F5FA",
+  "surface_alt": "#EEF1F8",
+  "text_primary": "#5E6288",
+  "text_secondary": "#8A8FB0",
+  "primary_blue": "#87C6E2",
+  "primary_teal": "#77B8C3",
+  "accent_mint": "#B5D5B6",
+  "accent_purple": "#AEA4E3",
+  "accent_sky": "#8ED4F0",
+  "success": "#72C7A5",
+  "button_gradient_left": "#87C6E2",
+  "button_gradient_right": "#B5D5B6",
+  "dark_bg": "#1F2230",
+  "dark_surface": "#2A2E3F",
+  "dark_text_primary": "#F3F4FA",
+  "dark_text_secondary": "#B9BFD6"
+}
