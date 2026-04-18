@@ -14,6 +14,7 @@ class HabitFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      
       builder:(context, child) {
         return AppBackground(child: child!);
       },

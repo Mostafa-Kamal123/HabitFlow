@@ -32,7 +32,7 @@ class HabitListView extends StatelessWidget {
         habitCard(),
         habitCard(),
         habitCard(),
-        habitCard(),
+        
       ],
       
     );

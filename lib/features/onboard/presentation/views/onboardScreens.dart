@@ -6,6 +6,7 @@ import 'package:habit_flow/core/utils/habitflow_colors.dart';
 import 'package:habit_flow/features/home/presentation/views/homePage.dart';
 import 'package:habit_flow/features/onboard/presentation/views/widgets/customindicator.dart';
 import 'package:habit_flow/features/onboard/presentation/views/widgets/onboard.dart';
+import 'package:habit_flow/mainl_layout.dart';
 
 class onBardScreens extends StatefulWidget {
     const onBardScreens({super.key});
@@ -82,7 +83,7 @@ class _onBardScreensState extends State<onBardScreens> {
                         if(idx<2)
                         pageController.animateToPage(idx + 1, duration: Duration(milliseconds: 250), curve: Curves.linear);
                         else
-                        Get.to(()=>Homepage(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
+                        Get.to(()=>MainlLayout(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
 
                       });
                     },
