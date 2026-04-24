@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+
+class FrequencyWidget extends StatefulWidget {
+  const FrequencyWidget({super.key});
+
+  @override
+  State<FrequencyWidget> createState() => _FrequencyWidgetState();
+}
+
+class _FrequencyWidgetState extends State<FrequencyWidget> {
+  String frequency = "Daily";
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+    padding: const EdgeInsets.all(16),
+    child: Row(
+      children: ["Daily", "Weekly"].map((e) {
+        return Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                frequency = e;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(12),
+              margin: EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: frequency == e ? Colors.blue : Colors.grey[300],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(child: Text(e,style: TextStyle(color: Colors.black),)),
+            ),
+          ),
+        );
+      }).toList(),
+    ),
+  );
+  }
+}

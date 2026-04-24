@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habit_flow/core/utils/habitflow_colors.dart';
+import 'package:habit_flow/features/addHabit/presentation/views/addHabitPage.dart';
 import 'package:habit_flow/features/home/presentation/views/homePage.dart';
 
 class MainlLayout extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainlLayoutState extends State<MainlLayout> {
 int idx=0;
 final List<Widget> pages=[
   Homepage(),
-  FaIcon(FontAwesomeIcons.plus),
+  AddHabitpage(),
   FaIcon(FontAwesomeIcons.person)
 ];
 final List<Widget> elements=[
