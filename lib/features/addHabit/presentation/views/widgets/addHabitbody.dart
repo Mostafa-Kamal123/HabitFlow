@@ -68,7 +68,7 @@ final List<Color> colors = [
           });
         },),
         // SizedBox(height: 10,),
-        FrequencyWidget(),
+        FrequencyWidget(color: colors[selectedColor],),
         // SizedBox(height: 10,),
         Reminderwidget(),
         Goalwidget(),

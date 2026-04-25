@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habit_flow/core/utils/habitflow_colors.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/addHabitPage.dart';
+import 'package:habit_flow/features/habitprogress/presentation/views/allProgressPage.dart';
 import 'package:habit_flow/features/home/presentation/views/homePage.dart';
 
 class MainlLayout extends StatefulWidget {
@@ -17,11 +18,13 @@ int idx=0;
 final List<Widget> pages=[
   Homepage(),
   AddHabitpage(),
+  Allprogresspage(),
   FaIcon(FontAwesomeIcons.person)
 ];
 final List<Widget> elements=[
   FaIcon(FontAwesomeIcons.house),
   FaIcon(FontAwesomeIcons.plus),
+  FaIcon(FontAwesomeIcons.chartLine),
   FaIcon(FontAwesomeIcons.personRifle)
 ];
 

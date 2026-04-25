@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FrequencyWidget extends StatefulWidget {
-  const FrequencyWidget({super.key});
+  const FrequencyWidget({super.key, required this.color});
+  final Color color;
 
   @override
   State<FrequencyWidget> createState() => _FrequencyWidgetState();
@@ -26,7 +27,7 @@ class _FrequencyWidgetState extends State<FrequencyWidget> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
-                color: frequency == e ? Colors.blue : Colors.grey[300],
+                color: frequency == e ? widget.color : Colors.grey[300],
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(child: Text(e,style: TextStyle(color: Colors.black),)),
