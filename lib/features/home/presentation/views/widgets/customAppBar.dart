@@ -3,11 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    required this.userName,
+    required this.userAvatar,
+  });
+
+  final String userName;
+  final String userAvatar;
 
   @override
   Widget build(BuildContext context) {
-    String today =DateFormat('EEEE, dd MMM yyyy').format(DateTime.now());
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    final hour = DateTime.now().hour;
+    final greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+    String today = DateFormat('EEEE, dd MMM yyyy').format(DateTime.now());
+    final displayName = userName.isEmpty ? 'User' : userName;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 30),
       child: Row(
@@ -18,9 +30,9 @@ class CustomAppBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Good Morning ,Mostafa",style: TextStyle(fontSize: 20,color: Colors.black),),
-                SizedBox(height: 5,),
-                Text(today)
+                Text('$greeting, $displayName', style: TextStyle(fontSize: 20, color: isLightTheme ? Colors.black : Colors.white),),
+                const SizedBox(height: 5,),
+                Text(today, style: TextStyle(color: isLightTheme ? Colors.black : Colors.white))
               ],
             ),
           ),
@@ -29,10 +41,13 @@ class CustomAppBar extends StatelessWidget {
             height: 60,
             
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isLightTheme ? Colors.white : const Color(0xFF2A2E3F),
               borderRadius: BorderRadius.circular(50)
             ),
-            child: IconButton(onPressed: (){}, icon: Icon(Icons.person,size: 40,))),
+            child: CircleAvatar(
+              backgroundColor: isLightTheme ? Colors.white : const Color(0xFF2A2E3F),
+              backgroundImage: AssetImage(userAvatar),
+            )),
       ],),
     );
   }

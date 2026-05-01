@@ -16,13 +16,18 @@ class CustomhomeItem extends StatelessWidget {
   final Color colorIcon;
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Row(
       children: [
         FaIcon(icon, color: colorIcon, size: 40),
 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 20),
-          child: Column(children: [Text(tex1), Text(tex2)]),
+          child: Column(children: [
+            Text(tex1, style: TextStyle(color: isLightTheme ? Colors.black : Colors.white)),
+            Text(tex2, style: TextStyle(color: isLightTheme ? Colors.black : Colors.white))
+          ]),
         ),
       ],
     );

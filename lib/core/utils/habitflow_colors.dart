@@ -7,8 +7,8 @@ class HabitFlowColors {
   static const Color surface              = Color(0xFFF5F5FA);
   static const Color surfaceAlt           = Color(0xFFEEF1F8);
 
-  static const Color textPrimary          = Color(0xFF5E6288);
-  static const Color textSecondary        = Color(0xFF8A8FB0);
+  static const Color textPrimary          = Color(0xFF000000);
+  static const Color textSecondary        = Color(0xFF333333);
 
   static const Color primaryBlue          = Color(0xFF87C6E2);
   static const Color primaryTeal          = Color(0xFF77B8C3);
@@ -25,6 +25,11 @@ class HabitFlowColors {
   static const List<Color> backgroundGradient = [
     Color(0xFFBBE5FC),
     Color(0xFFEFCFF5),
+  ];
+
+  static const List<Color> darkBackgroundGradient = [
+    Color(0xFF1F2230),
+    Color(0xFF2A2E3F),
   ];
 
   // Dark theme

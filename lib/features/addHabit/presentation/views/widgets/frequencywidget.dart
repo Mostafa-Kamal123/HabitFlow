@@ -12,6 +12,8 @@ class _FrequencyWidgetState extends State<FrequencyWidget> {
   String frequency = "Daily";
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Padding(
     padding: const EdgeInsets.all(16),
     child: Row(
@@ -27,10 +29,10 @@ class _FrequencyWidgetState extends State<FrequencyWidget> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
-                color: frequency == e ? widget.color : Colors.grey[300],
+                color: frequency == e ? widget.color : (isLightTheme ? Colors.grey[300] : Colors.grey[700]),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Center(child: Text(e,style: TextStyle(color: Colors.black),)),
+              child: Center(child: Text(e, style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),)),
             ),
           ),
         );

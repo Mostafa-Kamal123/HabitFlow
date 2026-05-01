@@ -5,6 +5,7 @@ import 'package:habit_flow/core/utils/habitflow_colors.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/addHabitPage.dart';
 import 'package:habit_flow/features/habitprogress/presentation/views/allProgressPage.dart';
 import 'package:habit_flow/features/home/presentation/views/homePage.dart';
+import 'package:habit_flow/features/profile/presentation/views/profilepage.dart';
 
 class MainlLayout extends StatefulWidget {
   const MainlLayout({super.key});
@@ -19,34 +20,44 @@ final List<Widget> pages=[
   Homepage(),
   AddHabitpage(),
   Allprogresspage(),
-  FaIcon(FontAwesomeIcons.person)
+  ProfilePage()
 ];
-final List<Widget> elements=[
-  FaIcon(FontAwesomeIcons.house),
-  FaIcon(FontAwesomeIcons.plus),
-  FaIcon(FontAwesomeIcons.chartLine),
-  FaIcon(FontAwesomeIcons.personRifle)
-];
+
+  List<Widget> getElements(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    Color iconColor = isLightTheme ? Colors.black : Colors.white;
+    
+    return [
+      FaIcon(FontAwesomeIcons.house, color: iconColor),
+      FaIcon(FontAwesomeIcons.plus, color: iconColor),
+      FaIcon(FontAwesomeIcons.chartLine, color: iconColor),
+      FaIcon(FontAwesomeIcons.user, color: iconColor)
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
       body: pages[idx],
-      bottomNavigationBar:CurvedNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(
         animationDuration: Duration(milliseconds: 700),
         buttonBackgroundColor: HabitFlowColors.primaryBlue,
         height: 70,
         index: idx,
+        color: isLightTheme 
+          ? const Color(0xFFF5F5FA).withOpacity(0.95)
+          : const Color(0xFF2A2E3F).withOpacity(0.95),
         backgroundColor: Colors.transparent,
-        items: elements,
+        items: getElements(context),
         onTap: (value) {
           setState(() {
             idx=value;
           });
         },
-      
       ) ,
     );
   }

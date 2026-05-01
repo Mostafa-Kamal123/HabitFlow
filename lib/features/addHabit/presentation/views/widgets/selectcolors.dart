@@ -18,12 +18,14 @@ final Function(int) onColorSelected;
 class _selectcolorState extends State<selectcolor> {
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
     padding: const EdgeInsets.all(16),
-    child: Text("Color",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+    child: Text("Color", style: TextStyle(color: isLightTheme ? Colors.black : Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
           ),
           SizedBox(
     height: 60,
@@ -42,7 +44,7 @@ class _selectcolorState extends State<selectcolor> {
               color: widget.colors[index],
               shape: BoxShape.circle,
               border: widget.selectedColor == index
-                  ? Border.all(width: 3, color: Colors.black)
+                  ? Border.all(width: 3, color: isLightTheme ? Colors.black : Colors.white)
                   : null,
             ),
           ),

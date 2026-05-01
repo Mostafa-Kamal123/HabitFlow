@@ -1,81 +1,129 @@
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:habit_flow/core/utils/habitflow_colors.dart';
 
 class HabitForm extends StatefulWidget {
-    HabitForm({
-    super.key, required this.icon, required this.color,
+  HabitForm({
+    super.key,
+    required this.icon,
+    required this.color,
+    required this.targetCount,
+    required this.onTargetCountChanged, required this.onNameChanged, required this.onDescriptionChanged,
   });
-  IconData icon;
 
-final Color color;
+  final IconData icon;
+  final Color color;
+  final int targetCount;
+  final ValueChanged<int> onTargetCountChanged;
+  final Function(String) onNameChanged;
+  final Function(String) onDescriptionChanged;
   @override
   State<HabitForm> createState() => _HabitFormState();
 }
 
 class _HabitFormState extends State<HabitForm> {
-  String habitnam='';
-String description='';
+  String habitnam = '';
+  String description = '';
+
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+
     return Container(
-      height: 150,
       margin: const EdgeInsets.symmetric(horizontal: 5),
-    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(24),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.3),
-          blurRadius: 18,
-          offset: const Offset(0, 8),
-        ),
-      ],
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: widget.color,
-                borderRadius: BorderRadius.circular(20)
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        color: isLightTheme ? Colors.white : const Color(0xFF2A2E3F),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: widget.color,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(child: Icon(widget.icon, size: 35, color: Colors.white)),
               ),
-              child: Center(child: Icon(widget.icon,size: 35,color: Colors.white,)),
-            ),
-          
-          SizedBox(width: 10,),
-          Expanded(
-            child: Column(
-              children: [
-                TextField(
-                      decoration: InputDecoration(labelText: "Habit Name"),
-                      onChanged: (value){
-                        setState(() {
-                          habitnam=value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 10),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  children: [
                     TextField(
-                      decoration: InputDecoration(labelText: "Description"),
-                      onChanged: (value) {
-                        description=value;
-                      }
+                      decoration: InputDecoration(
+                        labelText: 'Habit Name',
+                        labelStyle: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: isLightTheme ? Colors.black54 : Colors.white54),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: isLightTheme ? Colors.black : Colors.white),
+                        ),
+                      ),
+                      style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
+                      onChanged: widget.onNameChanged
                     ),
-                
-              ],
-            ),
-          )
-          ],
-        )
-      ],
-    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                        labelStyle: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: isLightTheme ? Colors.black54 : Colors.white54),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: isLightTheme ? Colors.black : Colors.white),
+                        ),
+                      ),
+                      style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
+                      onChanged: widget.onDescriptionChanged
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Target Count',
+                  style: TextStyle(color: isLightTheme ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  if (widget.targetCount > 1) {
+                    widget.onTargetCountChanged(widget.targetCount - 1);
+                  }
+                },
+                icon: Icon(Icons.remove, color: isLightTheme ? Colors.black : Colors.white),
+              ),
+              Text(
+                '${widget.targetCount}',
+                style: TextStyle(color: isLightTheme ? Colors.black : Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                onPressed: () {
+                  widget.onTargetCountChanged(widget.targetCount + 1);
+                },
+                icon: Icon(Icons.add, color: isLightTheme ? Colors.black : Colors.white),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -34,7 +34,7 @@ class _onBardScreensState extends State<onBardScreens> {
                 onTap: () {
                   pageController.animateToPage(idx=2, duration: Duration(milliseconds: 250), curve: Curves.linear);
                 },
-                child: Text("Skip",style: TextStyle(fontSize: 20),textAlign: TextAlign.right,)),
+                child: Text(idx<2?"Skip":"",style: TextStyle(fontSize: 20),textAlign: TextAlign.right,)),
             ),
         
             Expanded(

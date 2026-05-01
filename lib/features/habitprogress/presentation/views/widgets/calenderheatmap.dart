@@ -2,46 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 
 class Calenderheatmap extends StatelessWidget {
-  const Calenderheatmap({super.key});
+  const Calenderheatmap({
+    super.key,
+    required this.datasets,
+  });
+
+  final Map<DateTime, int> datasets;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-    margin: EdgeInsets.all(16),
-    padding: EdgeInsets.all(16),
-    decoration: _cardDecoration(),
-    child: HeatMap(
-      size: 15,
-      startDate: DateTime.now().subtract(Duration(days: 21)),
-      endDate: DateTime.now(),
-      datasets: {
-        DateTime(2026, 4, 1): 1,
-        DateTime(2026, 4, 2): 3,
-        DateTime(2026, 4, 3): 2,
-      },
-      colorMode: ColorMode.opacity,
-      showColorTip: false, colorsets: {
-        1: Colors.red,
-    3: Colors.orange,
-    5: Colors.yellow,
-    7: Colors.green,
-    9: Colors.blue,
-    11: Colors.indigo,
-    13: Colors.purple,
-      },
-    ),
-  );
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: _cardDecoration(context),
+      child: HeatMap(
+        size: 15,
+        startDate: DateTime.now().subtract(const Duration(days: 21)),
+        endDate: DateTime.now(),
+        datasets: datasets,
+        colorMode: ColorMode.opacity,
+        showColorTip: false,
+        colorsets: {
+          1: Colors.red,
+          3: Colors.orange,
+          5: Colors.yellow,
+          7: Colors.green,
+          9: Colors.blue,
+          11: Colors.indigo,
+          13: Colors.purple,
+        },
+      ),
+    );
   }
 }
-BoxDecoration _cardDecoration() {
+
+BoxDecoration _cardDecoration(BuildContext context) {
+  bool isLightTheme = Theme.of(context).brightness == Brightness.light;
   return BoxDecoration(
-    color: Colors.white.withOpacity(0.8),
+    color: isLightTheme ? const Color.fromRGBO(255, 255, 255, 0.8) : const Color(0xFF2A2E3F).withAlpha(230),
     borderRadius: BorderRadius.circular(24),
     boxShadow: [
       BoxShadow(
         blurRadius: 20,
-        color: Colors.black.withOpacity(0.1),
+        color: const Color.fromRGBO(0, 0, 0, 0.1),
       )
     ],
   );

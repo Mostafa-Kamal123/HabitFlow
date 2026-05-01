@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Stats extends StatelessWidget {
-  const Stats({super.key});
+  const Stats({
+    super.key,
+    required this.completionRate,
+    required this.bestStreak,
+  });
+
+  final String completionRate;
+  final String bestStreak;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +17,9 @@ class Stats extends StatelessWidget {
     padding: const EdgeInsets.all(16),
     child: Row(
       children: [
-        Expanded(child: _statCard("Completion Rate", "89%")),
-        SizedBox(width: 10),
-        Expanded(child: _statCard("Best Streak", "15 days")),
+        Expanded(child: _statCard("Completion Rate", completionRate)),
+        const SizedBox(width: 10),
+        Expanded(child: _statCard("Best Streak", bestStreak)),
       ],
     ),
   );
@@ -34,12 +41,12 @@ Widget _statCard(String title, String value) {
 }
 BoxDecoration _cardDecoration() {
   return BoxDecoration(
-    color: Colors.white.withOpacity(0.8),
+    color: const Color.fromRGBO(255, 255, 255, 0.8),
     borderRadius: BorderRadius.circular(24),
     boxShadow: [
       BoxShadow(
         blurRadius: 20,
-        color: Colors.black.withOpacity(0.1),
+        color: const Color.fromRGBO(0, 0, 0, 0.1),
       )
     ],
   );

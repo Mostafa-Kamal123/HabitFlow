@@ -13,27 +13,27 @@ class HabitFlowTheme {
       surface: HabitFlowColors.surface,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-      onSurface: HabitFlowColors.textPrimary,
+      onSurface: Colors.black,
     ),
 
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.bold,
-        color: HabitFlowColors.textPrimary,
+        color: Colors.black,
       ),
       headlineMedium: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w600,
-        color: HabitFlowColors.textPrimary,
+        color: Colors.black,
       ),
       bodyLarge: TextStyle(
         fontSize: 16,
-        color: HabitFlowColors.textPrimary,
+        color: Colors.black,
       ),
       bodyMedium: TextStyle(
         fontSize: 14,
-        color: HabitFlowColors.textSecondary,
+        color: Color(0xFF333333),
       ),
     ),
 
@@ -41,9 +41,9 @@ class HabitFlowTheme {
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
-      iconTheme: IconThemeData(color: HabitFlowColors.textPrimary),
+      iconTheme: IconThemeData(color: Colors.black),
       titleTextStyle: TextStyle(
-        color: HabitFlowColors.textPrimary,
+        color: Colors.black,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
@@ -71,7 +71,7 @@ class HabitFlowTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: HabitFlowColors.surfaceAlt,
-      hintStyle: const TextStyle(color: HabitFlowColors.textSecondary),
+      hintStyle: const TextStyle(color: Color(0xFF333333)),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide.none,
@@ -92,7 +92,7 @@ class HabitFlowTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: HabitFlowColors.surface,
       selectedItemColor: HabitFlowColors.primaryBlue,
-      unselectedItemColor: HabitFlowColors.textSecondary,
+      unselectedItemColor: Color(0xFF333333),
       type: BottomNavigationBarType.fixed,
       elevation: 0,
     ),
@@ -160,6 +160,35 @@ class HabitFlowTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: HabitFlowColors.darkSurface,
+      hintStyle: const TextStyle(color: HabitFlowColors.darkTextSecondary),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(
+          color: HabitFlowColors.primaryBlue,
+          width: 1.5,
+        ),
+      ),
+    ),
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: HabitFlowColors.darkSurface,
+      selectedItemColor: HabitFlowColors.primaryBlue,
+      unselectedItemColor: HabitFlowColors.darkTextSecondary,
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
     ),
   );
 }

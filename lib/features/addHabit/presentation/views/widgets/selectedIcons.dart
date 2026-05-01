@@ -20,12 +20,14 @@ class SelectedIcons extends StatefulWidget {
 class _SelectedIconsState extends State<SelectedIcons> {
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
     padding: const EdgeInsets.all(16),
-    child: Text("Icon",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+    child: Text("Icon", style: TextStyle(color: isLightTheme ? Colors.black : Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
           ),
           SizedBox(
     height: 50,
@@ -43,10 +45,10 @@ class _SelectedIconsState extends State<SelectedIcons> {
             decoration: BoxDecoration(
               color: widget.selectedIcon == index
                   ? widget.color.withOpacity(0.2)
-                  : Colors.white,
+                  : (isLightTheme ? Colors.white : const Color(0xFF2A2E3F)),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(widget.icons[index]),
+            child: Icon(widget.icons[index], color: isLightTheme ? Colors.black : Colors.white),
           ),
         );
       },

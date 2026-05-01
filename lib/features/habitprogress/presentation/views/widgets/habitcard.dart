@@ -1,86 +1,76 @@
 import 'package:flutter/material.dart';
 
-class Habitcard extends StatefulWidget {
-  const Habitcard({super.key});
+class Habitcard extends StatelessWidget {
+  const Habitcard({
+    super.key,
+    required this.title,
+    required this.streakDays,
+    required this.iconCode,
+    required this.iconColor,
+  });
 
-  @override
-  State<Habitcard> createState() => _HabitcardState();
-}
+  final String title;
+  final String streakDays;
+  final int iconCode;
+  final int iconColor;
 
-class _HabitcardState extends State<Habitcard> {
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Container(
-    margin: EdgeInsets.all(16),
-    padding: EdgeInsets.all(16),
-    decoration: _cardDecoration(),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            _iconBox(),
-            SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Read a Book", style: TextStyle(fontSize: 18,color: Colors.black)),
-                Row(
-                  children: [
-                    Icon(Icons.local_fire_department, color: Colors.red),
-                    Text(" 15 days",style: TextStyle(color: Colors.black),),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-        SizedBox(height: 16),
-        _tabs(),
-      ],
-    ),
-  );
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: _cardDecoration(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              _iconBox(iconCode, iconColor),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: TextStyle(fontSize: 18, color: isLightTheme ? Colors.black : Colors.white)),
+                  Row(
+                    children: [
+                      const Icon(Icons.local_fire_department, color: Colors.red),
+                      Text(' $streakDays', style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
-BoxDecoration _cardDecoration() {
+
+BoxDecoration _cardDecoration(BuildContext context) {
+  bool isLightTheme = Theme.of(context).brightness == Brightness.light;
   return BoxDecoration(
-    color: Colors.white.withOpacity(0.8),
+    color: isLightTheme ? const Color.fromRGBO(255, 255, 255, 0.8) : const Color(0xFF2A2E3F).withAlpha(230),
     borderRadius: BorderRadius.circular(24),
     boxShadow: [
       BoxShadow(
         blurRadius: 20,
-        color: Colors.black.withOpacity(0.1),
+        color: const Color.fromRGBO(0, 0, 0, 0.1),
       )
     ],
   );
 }
 
-Widget _iconBox() {
+Widget _iconBox(int iconCode, int iconColor) {
   return Container(
     width: 60,
     height: 60,
     decoration: BoxDecoration(
-      color: Colors.green,
+      color: Color(iconColor),
       borderRadius: BorderRadius.circular(16),
     ),
-    child: Icon(Icons.menu_book, color: Colors.white),
-  );
-}
-Widget _tabs() {
-  return Row(
-    children: ["Weekly", "Monthly"].map((e) {
-      bool selected = e == "Weekly";
-      return Expanded(
-        child: Container(
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            color: selected ? Colors.green : Colors.grey[200],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(child: Text(e , style: TextStyle(color: Colors.black),)),
-        ),
-      );
-    }).toList(),
+    child: Icon(IconData(iconCode, fontFamily: 'MaterialIcons'), color: Colors.white),
   );
 }

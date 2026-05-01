@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:habit_flow/core/utils/habitflow_colors.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:habit_flow/core/models/habit_model.dart';
+import 'package:habit_flow/features/addHabit/data/models/habit_model.dart';
+import 'package:habit_flow/features/addHabit/presentation/view_model/add_habit_view_model.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/customhabitbar.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/goalwidget.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/habitform.dart';
@@ -9,6 +13,7 @@ import 'package:habit_flow/features/addHabit/presentation/views/widgets/reminder
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/savebutton.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/selectcolors.dart';
 import 'package:habit_flow/features/addHabit/presentation/views/widgets/selectedIcons.dart';
+import 'package:habit_flow/mainl_layout.dart';
 
 class Addhabitbody extends StatefulWidget {
   Addhabitbody({super.key});
@@ -18,8 +23,10 @@ class Addhabitbody extends StatefulWidget {
 }
 
 class _AddhabitbodyState extends State<Addhabitbody> {
+  final vm = AddHabitViewModel();
   String habitName = "";
   String description = "";
+  int targetCount = 1;
 
   int selectedIcon = 0;
   int selectedColor = 0;
@@ -48,13 +55,22 @@ final List<Color> colors = [
   ];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return ListView(
+      
       children: [
-        SizedBox(height: 30,),
+        
         CustomNewHabitBar(),
         SizedBox(height: 10,),
-        HabitForm(icon: icons[selectedIcon],color: colors[selectedColor],),
+        HabitForm(
+          icon: icons[selectedIcon],
+          color: colors[selectedColor],
+          targetCount: targetCount,
+          onTargetCountChanged: (value) {
+            setState(() {
+              targetCount = value;
+            });
+          }, onNameChanged: (value) {habitName=value;  }, onDescriptionChanged: (value) { description=value; },
+        ),
         SelectedIcons(icons: icons, selectedIcon: selectedIcon,onIconSelected: (index) {
           setState(() {
             selectedIcon=index;
@@ -70,9 +86,22 @@ final List<Color> colors = [
         // SizedBox(height: 10,),
         FrequencyWidget(color: colors[selectedColor],),
         // SizedBox(height: 10,),
-        Reminderwidget(),
-        Goalwidget(),
-        Savebutton(),
+        
+        
+          
+            Goalwidget(),
+          
+        
+        Savebutton(
+  onPressed: () {
+
+    vm.addHabit(habitName, icons[selectedIcon].codePoint, colors[selectedColor].value, targetCount, frequency, goalDays
+    ,DateTime.now(),[]
+    );
+
+  Get.to(()=>MainlLayout(),transition: Transition.fade,duration: const Duration(milliseconds: 250));
+  },
+),
         SizedBox(height: 30,)
       ],
     );

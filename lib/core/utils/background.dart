@@ -8,12 +8,16 @@ class AppBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: HabitFlowColors.backgroundGradient,
+          colors: isLightTheme 
+            ? HabitFlowColors.backgroundGradient
+            : HabitFlowColors.darkBackgroundGradient,
         ),
       ),
       child: child,
