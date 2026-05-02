@@ -31,6 +31,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     });
   }
 
+  void _deleteHabit(int index) {
+    setState(() {
+      vm.deleteHabit(index);
+      vm.loadThreeHabits();
+    });
+  }
+
   void _openAllHabitsPage() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const AllHabitsPage()),
@@ -59,6 +66,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         HabitListView(
           habits: vm.habits,
           onHabitUpdated: _updateHabit,
+          onHabitDeleted: _deleteHabit,
           onSeeAll: _openAllHabitsPage,
         ),
       ],

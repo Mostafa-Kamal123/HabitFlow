@@ -23,6 +23,11 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteHabit(int index) {
+    repo.deleteHabit(index);
+    loadAllHabits();
+  }
+
   int completedCount() {
     return allHabits.where((habit) => habit.isCompleted).length;
   }

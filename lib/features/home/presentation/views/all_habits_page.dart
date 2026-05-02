@@ -27,6 +27,13 @@ class _AllHabitsPageState extends State<AllHabitsPage> {
     });
   }
 
+  void _deleteHabit(int index) {
+    setState(() {
+      vm.habits.removeAt(index);
+      vm.deleteHabit(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +44,7 @@ class _AllHabitsPageState extends State<AllHabitsPage> {
       body: HabitListView(
         habits: vm.habits,
         onHabitUpdated: _updateHabit,
+        onHabitDeleted: _deleteHabit,
         showHeader: false,
       ),
     );

@@ -85,11 +85,18 @@ class _ProgresspageState extends State<Progresspage> {
                 iconColor: habit?.color ?? 0xFF4CAF50,
               ),
               const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0),
+                child: Text(
+                  "Habit Chart",
+                  style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
+                ),
+              ),
               Chartwidget(spots: habit == null ? [] : vm.habitChartSpots(habit)),
               Padding(
                 padding: const EdgeInsets.only(left: 18.0),
                 child: Text(
-                  "Calendar for 21 days",
+                  "Calendar",
                   style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
                 ),
               ),

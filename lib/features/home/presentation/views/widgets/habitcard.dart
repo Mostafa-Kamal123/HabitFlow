@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:habit_flow/features/addHabit/data/models/habit_model.dart';
+import 'package:habit_flow/features/addHabit/presentation/views/editHabitPage.dart';
 import 'package:habit_flow/features/home/presentation/views/widgets/habit_progress_circle.dart';
 
 class HabitCard extends StatefulWidget {
@@ -10,11 +12,13 @@ class HabitCard extends StatefulWidget {
     required this.habit,
     required this.index,
     required this.onHabitUpdated,
+    required this.onHabitDeleted,
   });
 
   final HabitModel habit;
   final int index;
   final ValueChanged<HabitModel> onHabitUpdated;
+  final ValueChanged<int> onHabitDeleted;
 
   @override
   State<HabitCard> createState() => _HabitCardState();
@@ -52,7 +56,7 @@ class _HabitCardState extends State<HabitCard> {
             ],
           ),
           trailing: SizedBox(
-            width: 110,
+            width: 150,
             height: 70,
             child: Row(
               children: [
@@ -61,7 +65,7 @@ class _HabitCardState extends State<HabitCard> {
                   total: widget.habit.targetCount,
                   isCompleted: widget.habit.isCompleted,
                 ),
-                const SizedBox(width: 5),
+                // const SizedBox(width: 5),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -78,7 +82,26 @@ class _HabitCardState extends State<HabitCard> {
                     size: 35,
                     color: widget.habit.isCompleted ? Colors.green : Colors.grey,
                   ),
-                )
+                ),
+                PopupMenuButton<String>(
+                  onSelected: (value) {
+                    if (value == 'edit') {
+                      _editHabit(context);
+                    } else if (value == 'delete') {
+                      _deleteHabit(context);
+                    }
+                  },
+                  itemBuilder: (BuildContext context) => [
+                    const PopupMenuItem<String>(
+                      value: 'edit',
+                      child: Text('Edit'),
+                    ),
+                    const PopupMenuItem<String>(
+                      value: 'delete',
+                      child: Text('Delete'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -157,6 +180,35 @@ class _HabitCardState extends State<HabitCard> {
               ],
             );
           },
+        );
+      },
+    );
+  }
+
+  void _editHabit(BuildContext context) {
+    Get.to(() => EditHabitPage(habit: widget.habit, index: widget.index));
+  }
+
+  void _deleteHabit(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Habit'),
+          content: Text('Are you sure you want to delete "${widget.habit.name}"?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                widget.onHabitDeleted(widget.index);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            ),
+          ],
         );
       },
     );

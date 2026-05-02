@@ -7,7 +7,11 @@ class HabitForm extends StatefulWidget {
     required this.icon,
     required this.color,
     required this.targetCount,
-    required this.onTargetCountChanged, required this.onNameChanged, required this.onDescriptionChanged,
+    required this.onTargetCountChanged,
+    required this.onNameChanged,
+    required this.onDescriptionChanged,
+    this.initialName = '',
+    this.initialDescription = '',
   });
 
   final IconData icon;
@@ -16,13 +20,29 @@ class HabitForm extends StatefulWidget {
   final ValueChanged<int> onTargetCountChanged;
   final Function(String) onNameChanged;
   final Function(String) onDescriptionChanged;
+  final String initialName;
+  final String initialDescription;
   @override
   State<HabitForm> createState() => _HabitFormState();
 }
 
 class _HabitFormState extends State<HabitForm> {
-  String habitnam = '';
-  String description = '';
+  late TextEditingController habitNameController;
+  late TextEditingController descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    habitNameController = TextEditingController(text: widget.initialName);
+    descriptionController = TextEditingController(text: widget.initialDescription);
+  }
+
+  @override
+  void dispose() {
+    habitNameController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +80,7 @@ class _HabitFormState extends State<HabitForm> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: habitNameController,
                       decoration: InputDecoration(
                         labelText: 'Habit Name',
                         labelStyle: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
@@ -71,10 +92,11 @@ class _HabitFormState extends State<HabitForm> {
                         ),
                       ),
                       style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
-                      onChanged: widget.onNameChanged
+                      onChanged: widget.onNameChanged,
                     ),
                     const SizedBox(height: 10),
                     TextField(
+                      controller: descriptionController,
                       decoration: InputDecoration(
                         labelText: 'Description',
                         labelStyle: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
@@ -86,7 +108,7 @@ class _HabitFormState extends State<HabitForm> {
                         ),
                       ),
                       style: TextStyle(color: isLightTheme ? Colors.black : Colors.white),
-                      onChanged: widget.onDescriptionChanged
+                      onChanged: widget.onDescriptionChanged,
                     ),
                   ],
                 ),

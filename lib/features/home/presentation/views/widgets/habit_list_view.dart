@@ -8,12 +8,14 @@ class HabitListView extends StatefulWidget {
     super.key,
     required this.habits,
     required this.onHabitUpdated,
+    required this.onHabitDeleted,
     this.showHeader = true,
     this.onSeeAll,
   });
 
   final List<HabitModel> habits;
   final void Function(int index, HabitModel habit) onHabitUpdated;
+  final void Function(int index) onHabitDeleted;
   final bool showHeader;
   final VoidCallback? onSeeAll;
 
@@ -64,6 +66,7 @@ class _HabitListViewState extends State<HabitListView> {
             habit: habit,
             index: index,
             onHabitUpdated: (updatedHabit) => widget.onHabitUpdated(index, updatedHabit),
+            onHabitDeleted: (deletedIndex) => widget.onHabitDeleted(deletedIndex),
           );
         }),
       ],

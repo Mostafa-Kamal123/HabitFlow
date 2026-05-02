@@ -16,4 +16,15 @@ class AddHabitViewModel extends ChangeNotifier {
 
     repo.addHabit(habit);
   }
+
+  void updateHabit(int index, String name, int icon, int color,int targetCount,String frequency,int days) {
+    final habit = repo.getHabits()[index];
+    habit.name = name;
+    habit.icon = icon;
+    habit.color = color;
+    habit.targetCount = targetCount;
+    habit.frequency = frequency;
+    habit.days = days;
+    habit.save();
+  }
 }
